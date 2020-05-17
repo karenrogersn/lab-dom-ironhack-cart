@@ -3,21 +3,26 @@
 function updateSubtotal(product) {
   console.log('Calculating subtotal, yey!');
 
-  //... your code goes here
+  let $price = parseFloat(product.querySelector('.price span').innerHTML);
+  let $quantity = parseInt(product.querySelector('.quantity input').value);
+
+  //Use the values you extracted to calculate the subtotal price.
+  let $subtotal = $price * $quantity;
+
+  product.querySelector('.subtotal span').innerHTML = $subtotal;
+  /*using a dot (.) because I'm accessing a class then span because I need to access the span whithin the element*/
+  return $subtotal;
 }
 
+// ITERATION 2
 function calculateAll() {
-  // code in the following two lines is added just for testing purposes.
-  // it runs when only iteration 1 is completed. at later point, it can be removed.
-  const singleProduct = document.querySelector('.product');
-  updateSubtotal(singleProduct);
-  // end of test
+  const allProducts = document.querySelectorAll('.product'); //using querySelectorAll because we're targeting all elements that may share the the css selector "product". This is useful when you have + than 1 product
+  let total = 0;
 
-  // ITERATION 2
-  //... your code goes here
-
-  // ITERATION 3
-  //... your code goes here
+  //spreading and mapping to get the elements in each row and update the subtotal in order to get the total
+  [...allProducts].map((product) => (total = total + updateSubtotal(product)));
+  document.querySelector('#total-value span').innerHTML = total;
+  console.log(total);
 }
 
 // ITERATION 4
